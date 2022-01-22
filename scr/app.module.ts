@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TelecomModule } from './telecom/telecom.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserEntity } from './telecom/user.entity';
+import { UserEntity } from './telecom/models';
 import { config } from './config';
 
 @Module({

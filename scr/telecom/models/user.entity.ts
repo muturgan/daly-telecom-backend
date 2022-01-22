@@ -1,4 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn, ValueTransformer } from 'typeorm';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 const boxesTransformer: ValueTransformer = {
    to(val?: string[] | null): string | null {
@@ -34,39 +35,51 @@ const TABLE_NAME = 'Users';
 export class UserEntity {
    public static readonly TABLE_NAME = TABLE_NAME;
 
+   @ApiProperty({type: 'integer'})
    @PrimaryGeneratedColumn({type: 'int', unsigned: true})
    public id!: number;
 
+   @ApiPropertyOptional({type: String})
    @Column({type: 'varchar', length: 64, nullable: true, default: null})
    public name?: string | null;
 
+   @ApiPropertyOptional({type: String})
    @Column({type: 'varchar', length: 64, nullable: true, default: null})
    public address?: string | null;
 
+   @ApiPropertyOptional({type: String})
    @Column({type: 'varchar', length: 16, nullable: true, default: null})
    public phone?: string | null;
 
+   @ApiPropertyOptional({type: String})
    @Column({type: 'varchar', length: 16, nullable: true, default: null})
    public mobile?: string | null;
 
+   @ApiPropertyOptional({type: 'integer'})
    @Column({type: 'int', unsigned: true, nullable: true, default: null})
    public kross?: number | null;
 
+   @ApiPropertyOptional({type: 'integer'})
    @Column({type: 'int', unsigned: true, nullable: true, default: null})
    public magistral?: number | null;
 
+   @ApiPropertyOptional({type: 'integer'})
    @Column({type: 'int', unsigned: true, nullable: true, default: null})
    public raspred?: number | null;
 
+   @ApiPropertyOptional({type: 'integer'})
    @Column({type: 'int', unsigned: true, nullable: true, default: null})
    public adsl?: number | null;
 
+   @ApiPropertyOptional({type: [String]})
    @Column({type: 'text', transformer: boxesTransformer, nullable: true, default: null})
    public boxes?: string[] | null;
 
+   @ApiPropertyOptional({type: Number, format: 'double', example: 37.586452})
    @Column({type: 'double', nullable: true, default: null})
    public latitude?: number | null;
 
+   @ApiPropertyOptional({type: Number, format: 'double', example: 54.166907})
    @Column({type: 'double', nullable: true, default: null})
    public longitude?: number | null;
 }

@@ -1,12 +1,14 @@
 import { Body, Controller, Get, Post, Put, Delete, Param, HttpCode, HttpStatus, NotFoundException, UsePipes, ValidationPipe } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeepPartial, Repository } from 'typeorm';
-import { UserBodyDto } from './user_body.dto';
-import { UserEntity } from './user.entity';
+import { UserBodyDto, Success, CreatedUserID, UserList } from './models';
+import { UserEntity } from './models/user.entity';
+import { ApiOperation, ApiTags, ApiOkResponse, ApiParam } from '@nestjs/swagger';
 
 
 @UsePipes(ValidationPipe)
 @Controller('api')
+@ApiTags('Операции над пользователями')
 export class TelecomController
 {
    constructor(
@@ -16,13 +18,18 @@ export class TelecomController
 
 
    @Get('users')
-   public async getUsersList(): Promise<{users: UserEntity[]}>
+   @ApiOperation({summary: 'Получение списка пользователей'})
+   @ApiOkResponse({type: UserList})
+   public async getUsersList(): Promise<UserList>
    {
       const users = await this._userRepository.find();
       return { users };
    }
 
    @Get('users/:userId')
+   @ApiParam({name: 'userId', type: 'integer'})
+   @ApiOperation({summary: 'Получение данных пользователя по идентификатору'})
+   @ApiOkResponse({type: UserEntity})
    public async getUser(@Param('userId') userId: string): Promise<UserEntity>
    {
       const userIdNum = Number(userId);
@@ -40,7 +47,8 @@ export class TelecomController
 
    @Post('users')
    @HttpCode(HttpStatus.OK)
-   public async register(@Body() body: UserBodyDto): Promise<{id: number}>
+   @ApiOperation({summary: 'Создание нового пользователя'})
+   public async register(@Body() body: UserBodyDto): Promise<CreatedUserID>
    {
       const userEntity = this._userRepository.create(body);
       const savedUser = await this._userRepository.save(userEntity);
@@ -48,7 +56,10 @@ export class TelecomController
    }
 
    @Put('users/:userId')
-   public async updateUser(@Param('userId') userId: string, @Body() body: UserBodyDto): Promise<{success: boolean}>
+   @ApiParam({name: 'userId', type: 'integer'})
+   @ApiOperation({summary: 'Обновление данных пользователя'})
+   @ApiOkResponse({type: Success})
+   public async updateUser(@Param('userId') userId: string, @Body() body: UserBodyDto): Promise<Success>
    {
       const userIdNum = Number(userId);
       if (!userIdNum) {
@@ -71,7 +82,10 @@ export class TelecomController
    }
 
    @Delete('users/:userId')
-   public async deleteUser(@Param('userId') userId: string): Promise<{success: boolean}>
+   @ApiParam({name: 'userId', type: 'integer'})
+   @ApiOperation({summary: 'Удаление пользователя'})
+   @ApiOkResponse({type: Success})
+   public async deleteUser(@Param('userId') userId: string): Promise<Success>
    {
       const userIdNum = Number(userId);
       if (!userIdNum) {
