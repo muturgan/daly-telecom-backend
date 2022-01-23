@@ -39,11 +39,6 @@ if (!DB_PASS) {
    throw new Error('DB_PASS enviroment variable is not set');
 }
 
-const DB_TIME = process.env.DB_TIME;
-if (!DB_TIME) {
-   throw new Error('DB_TIME enviroment variable is not set');
-}
-
 export const config = Object.freeze({
    // APPLICATION
    APP_PORT,
