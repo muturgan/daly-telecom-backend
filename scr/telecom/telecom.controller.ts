@@ -1,8 +1,7 @@
 import { Body, Controller, Get, Post, Put, Delete, Param, HttpCode, HttpStatus, NotFoundException, UsePipes, ValidationPipe } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeepPartial, Repository } from 'typeorm';
-import { UserBodyDto, Success, CreatedUserID, UserList } from './models';
-import { UserEntity } from './models/user.entity';
+import { UserBodyDto, Success, CreatedUserID, UserList, UserEntity } from './models';
 import { ApiOperation, ApiTags, ApiOkResponse, ApiParam } from '@nestjs/swagger';
 
 
