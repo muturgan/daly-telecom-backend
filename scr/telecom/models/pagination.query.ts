@@ -13,7 +13,7 @@ export class PaginationQuery
    @IsInt()
    @Transform(({value}) => value ? Number(value) : value)
    @IsOptional()
-   public pageNumber = DEFAULT_PAGE_NUMBER;
+   public readonly pageNumber = DEFAULT_PAGE_NUMBER;
 
    @ApiPropertyOptional({type: 'integer', default: DEFAULT_PAGE_SIZE, maximum: MAX_PAGE_SIZE})
    @IsPositive()
@@ -23,5 +23,5 @@ export class PaginationQuery
       return Math.min(querySize, MAX_PAGE_SIZE);
    })
    @IsOptional()
-   public pageSize = DEFAULT_PAGE_SIZE;
+   public readonly pageSize = DEFAULT_PAGE_SIZE;
 }

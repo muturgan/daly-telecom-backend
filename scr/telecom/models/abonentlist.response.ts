@@ -4,14 +4,14 @@ import { AbonentEntity } from './abonent.entity';
 export class AbonentList
 {
    @ApiProperty({type: [AbonentEntity]})
-   public abonents!: AbonentEntity[];
+   public readonly abonents!: AbonentEntity[];
 
    @ApiProperty({type: 'integer'})
-   public total!: number;
+   public readonly total!: number;
 
    @ApiProperty({type: 'integer'})
-   public pageNumber!: number;
+   public readonly pageNumber!: number;
 
    @ApiProperty({type: 'integer'})
-   public pageSize!: number;
+   public readonly pageSize!: number;
 }

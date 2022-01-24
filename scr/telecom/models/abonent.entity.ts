@@ -40,49 +40,49 @@ export class AbonentEntity {
 
    @ApiProperty({type: 'integer'})
    @PrimaryGeneratedColumn({type: 'int', unsigned: true})
-   public id!: number;
+   public readonly id!: number;
 
    @ApiPropertyOptional({type: String})
    @Column({type: 'varchar', length: 64, nullable: true, default: null})
-   public name?: string | null;
+   public readonly name?: string | null;
 
    @ApiPropertyOptional({type: String})
    @Column({type: 'varchar', length: 64, nullable: true, default: null})
-   public address?: string | null;
+   public readonly address?: string | null;
 
    @ApiPropertyOptional({type: String})
    @Column({type: 'varchar', length: 16, nullable: true, default: null})
-   public phone?: string | null;
+   public readonly phone?: string | null;
 
    @ApiPropertyOptional({type: String})
    @Column({type: 'varchar', length: 16, nullable: true, default: null})
-   public mobile?: string | null;
+   public readonly mobile?: string | null;
 
    @ApiPropertyOptional({type: 'integer'})
    @Column({type: 'int', unsigned: true, nullable: true, default: null})
-   public kross?: number | null;
+   public readonly kross?: number | null;
 
    @ApiPropertyOptional({type: 'integer'})
    @Column({type: 'int', unsigned: true, nullable: true, default: null})
-   public magistral?: number | null;
+   public readonly magistral?: number | null;
 
    @ApiPropertyOptional({type: 'integer'})
    @Column({type: 'int', unsigned: true, nullable: true, default: null})
-   public raspred?: number | null;
+   public readonly raspred?: number | null;
 
    @ApiPropertyOptional({type: 'integer'})
    @Column({type: 'int', unsigned: true, nullable: true, default: null})
-   public adsl?: number | null;
+   public readonly adsl?: number | null;
 
    @ApiPropertyOptional({type: [String]})
    @Column({type: 'text', transformer: boxesTransformer, nullable: true, default: null})
-   public boxes?: string[] | null;
+   public readonly boxes?: string[] | null;
 
    @ApiPropertyOptional({type: Number, format: 'double', example: 37.586452})
    @Column({type: 'double', nullable: true, default: null})
-   public latitude?: number | null;
+   public readonly latitude?: number | null;
 
    @ApiPropertyOptional({type: Number, format: 'double', example: 54.166907})
    @Column({type: 'double', nullable: true, default: null})
-   public longitude?: number | null;
+   public readonly longitude?: number | null;
 }

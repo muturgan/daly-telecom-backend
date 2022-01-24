@@ -7,11 +7,11 @@ export class EngineerEntity {
    public static readonly TABLE_NAME = TABLE_NAME;
 
    @PrimaryGeneratedColumn({type: 'int', unsigned: true})
-   public id!: number;
+   public readonly id!: number;
 
    @Column({type: 'varchar', length: 16, unique: true, nullable: false})
-   public login!: string;
+   public readonly login!: string;
 
    @Column({type: 'char', length: 11, unique: true, nullable: false})
-   public phone!: string;
+   public readonly phone!: string;
 }

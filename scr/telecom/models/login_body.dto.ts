@@ -6,10 +6,10 @@ export class LoginBodyDto
    @ApiProperty({type: String})
    @IsString()
    @IsNotEmpty()
-   public login!: string;
+   public readonly login!: string;
 
    @ApiProperty({type: String})
    @IsString()
    @IsNotEmpty()
-   public password!: string;
+   public readonly password!: string;
 }

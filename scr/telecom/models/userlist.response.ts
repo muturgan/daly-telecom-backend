@@ -4,5 +4,5 @@ import { AbonentEntity } from './abonent.entity';
 export class UserList
 {
    @ApiProperty({type: [AbonentEntity]})
-   public users!: AbonentEntity[];
+   public readonly users!: AbonentEntity[];
 }

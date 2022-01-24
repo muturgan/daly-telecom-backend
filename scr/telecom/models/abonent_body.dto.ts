@@ -6,64 +6,64 @@ export class AbonentBodyDto
    @ApiPropertyOptional({type: String})
    @IsString()
    @IsOptional()
-   public name?: string | null;
+   public readonly name?: string | null;
 
    @ApiPropertyOptional({type: String})
    @IsString()
    @IsOptional()
-   public address?: string | null;
+   public readonly address?: string | null;
 
    @ApiPropertyOptional({type: String})
    @IsString()
    @IsOptional()
-   public phone?: string | null;
+   public readonly phone?: string | null;
 
    @ApiPropertyOptional({type: String})
    @IsString()
    @IsOptional()
-   public mobile?: string | null;
+   public readonly mobile?: string | null;
 
    @ApiPropertyOptional({type: 'integer'})
    @IsPositive()
    @IsInt()
    @IsNumber()
    @IsOptional()
-   public kross?: number | null;
+   public readonly kross?: number | null;
 
    @ApiPropertyOptional({type: 'integer'})
    @IsPositive()
    @IsInt()
    @IsNumber()
    @IsOptional()
-   public magistral?: number | null;
+   public readonly magistral?: number | null;
 
    @ApiPropertyOptional({type: 'integer'})
    @IsPositive()
    @IsInt()
    @IsNumber()
    @IsOptional()
-   public raspred?: number | null;
+   public readonly raspred?: number | null;
 
    @ApiPropertyOptional({type: 'integer'})
    @IsPositive()
    @IsInt()
    @IsNumber()
    @IsOptional()
-   public adsl?: number | null;
+   public readonly adsl?: number | null;
 
    @ApiPropertyOptional({type: [String]})
    @IsString({each: true})
    @IsArray()
    @IsOptional()
-   public boxes?: string[] | null;
+   public readonly boxes?: string[] | null;
 
    @ApiPropertyOptional({type: Number, format: 'double', example: 37.586452})
    @IsNumber()
    @IsOptional()
-   public latitude?: number | null;
+   public readonly latitude?: number | null;
 
    @ApiPropertyOptional({type: Number, format: 'double', example: 54.166907})
    @IsNumber()
    @IsOptional()
-   public longitude?: number | null;
+   public readonly longitude?: number | null;
 }
