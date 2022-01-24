@@ -47,6 +47,7 @@ export class TelecomController
    @Post('users')
    @HttpCode(HttpStatus.OK)
    @ApiOperation({summary: 'Создание нового пользователя'})
+   @ApiOkResponse({type: CreatedUserID})
    public async register(@Body() body: UserBodyDto): Promise<CreatedUserID>
    {
       const userEntity = this._userRepository.create(body);
