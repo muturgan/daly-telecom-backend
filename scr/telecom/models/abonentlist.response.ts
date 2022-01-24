@@ -1,8 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { AbonentEntity } from './abonent.entity';
 
-export class UserList
+export class AbonentList
 {
    @ApiProperty({type: [AbonentEntity]})
-   public users!: AbonentEntity[];
+   public abonents!: AbonentEntity[];
 }

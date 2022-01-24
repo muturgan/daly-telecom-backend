@@ -1,4 +1,4 @@
-CREATE TABLE `Users` (
+CREATE TABLE `Abonents` (
     `id` int unsigned PRIMARY KEY AUTO_INCREMENT,
     `name` varchar(64) DEFAULT NULL,
     `address` varchar(64) DEFAULT NULL,

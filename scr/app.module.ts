@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TelecomModule } from './telecom/telecom.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserEntity } from './telecom/models';
+import { AbonentEntity } from './telecom/models';
 import { config } from './config';
 
 @Module({
@@ -14,7 +14,7 @@ import { config } from './config';
          database: config.DB_NAME,
          username: config.DB_USER,
          password: config.DB_PASS,
-         entities: [UserEntity],
+         entities: [AbonentEntity],
          synchronize: true,
       }),
    ],

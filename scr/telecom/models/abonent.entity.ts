@@ -14,6 +14,9 @@ const boxesTransformer: ValueTransformer = {
          if (!val) {
             return [];
          }
+         if (Array.isArray(val) && val.length === 0) {
+            return [];
+         }
 
          const parsed: string[] = JSON.parse(val);
          return parsed;
@@ -29,10 +32,10 @@ const boxesTransformer: ValueTransformer = {
    },
 };
 
-const TABLE_NAME = 'Users';
+const TABLE_NAME = 'Abonents';
 
 @Entity(TABLE_NAME)
-export class UserEntity {
+export class AbonentEntity {
    public static readonly TABLE_NAME = TABLE_NAME;
 
    @ApiProperty({type: 'integer'})

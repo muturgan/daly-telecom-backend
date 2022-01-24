@@ -1,23 +1,23 @@
 import { Body, Controller, Get, Post, Put, Delete, Param, HttpCode, HttpStatus, NotFoundException, UsePipes, ValidationPipe } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeepPartial, Repository } from 'typeorm';
-import { UserBodyDto, Success, CreatedUserID, UserList, UserEntity } from './models';
+import { AbonentBodyDto, Success, CreatedAbonentID, UserList, AbonentEntity } from './models';
 import { ApiOperation, ApiTags, ApiOkResponse, ApiParam } from '@nestjs/swagger';
 
 
-@UsePipes(ValidationPipe)
-@Controller('api')
+@UsePipes(new ValidationPipe())
+@Controller(['api', 'api/v1'])
 @ApiTags('Операции над пользователями')
-export class TelecomController
+export class TelecomControllerV1
 {
    constructor(
-      @InjectRepository(UserEntity)
-      private readonly _userRepository: Repository<UserEntity>,
+      @InjectRepository(AbonentEntity)
+      private readonly _userRepository: Repository<AbonentEntity>,
    ) {}
 
 
    @Get('users')
-   @ApiOperation({summary: 'Получение списка пользователей'})
+   @ApiOperation({summary: 'Получение списка пользователей', deprecated: true})
    @ApiOkResponse({type: UserList})
    public async getUsersList(): Promise<UserList>
    {
@@ -27,9 +27,9 @@ export class TelecomController
 
    @Get('users/:userId')
    @ApiParam({name: 'userId', type: 'integer'})
-   @ApiOperation({summary: 'Получение данных пользователя по идентификатору'})
-   @ApiOkResponse({type: UserEntity})
-   public async getUser(@Param('userId') userId: string): Promise<UserEntity>
+   @ApiOperation({summary: 'Получение данных пользователя по идентификатору', deprecated: true})
+   @ApiOkResponse({type: AbonentEntity})
+   public async getUser(@Param('userId') userId: string): Promise<AbonentEntity>
    {
       const userIdNum = Number(userId);
       if (!userIdNum) {
@@ -46,9 +46,9 @@ export class TelecomController
 
    @Post('users')
    @HttpCode(HttpStatus.OK)
-   @ApiOperation({summary: 'Создание нового пользователя'})
-   @ApiOkResponse({type: CreatedUserID})
-   public async register(@Body() body: UserBodyDto): Promise<CreatedUserID>
+   @ApiOperation({summary: 'Создание нового пользователя', deprecated: true})
+   @ApiOkResponse({type: CreatedAbonentID})
+   public async register(@Body() body: AbonentBodyDto): Promise<CreatedAbonentID>
    {
       const userEntity = this._userRepository.create(body);
       const savedUser = await this._userRepository.save(userEntity);
@@ -57,16 +57,16 @@ export class TelecomController
 
    @Put('users/:userId')
    @ApiParam({name: 'userId', type: 'integer'})
-   @ApiOperation({summary: 'Обновление данных пользователя'})
+   @ApiOperation({summary: 'Обновление данных пользователя', deprecated: true})
    @ApiOkResponse({type: Success})
-   public async updateUser(@Param('userId') userId: string, @Body() body: UserBodyDto): Promise<Success>
+   public async updateUser(@Param('userId') userId: string, @Body() body: AbonentBodyDto): Promise<Success>
    {
       const userIdNum = Number(userId);
       if (!userIdNum) {
          throw new NotFoundException();
       }
 
-      const updateObject: DeepPartial<UserEntity> = {};
+      const updateObject: DeepPartial<AbonentEntity> = {};
       Object.keys(body).forEach((key) => {
          // @ts-ignore
          updateObject[key] = body[key] || null;
@@ -83,7 +83,7 @@ export class TelecomController
 
    @Delete('users/:userId')
    @ApiParam({name: 'userId', type: 'integer'})
-   @ApiOperation({summary: 'Удаление пользователя'})
+   @ApiOperation({summary: 'Удаление пользователя', deprecated: true})
    @ApiOkResponse({type: Success})
    public async deleteUser(@Param('userId') userId: string): Promise<Success>
    {

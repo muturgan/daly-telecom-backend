@@ -1,7 +1,7 @@
 import { IsArray, IsInt, IsNumber, IsOptional, IsPositive, IsString } from 'class-validator';
 import { ApiPropertyOptional } from '@nestjs/swagger';
 
-export class UserBodyDto
+export class AbonentBodyDto
 {
    @ApiPropertyOptional({type: String})
    @IsString()
