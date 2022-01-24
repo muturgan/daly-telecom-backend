@@ -11,7 +11,8 @@
   "scripts": {
     "start": "export $(cat .env | xargs) && node dist/main.js",
     "build": "(rm -rf dist || npx rimraf dist) && tsc -p tsconfig.json",
-    "dev": "export $(cat .env | xargs) && ts-node scr/main.ts"
+    "dev": "export $(cat .env | xargs) && ts-node src/main.ts",
+    "create": "ts-node ./node_modules/.bin/typeorm migration:create -d src/migrations -n"
   },
   "repository": {
     "type": "git",

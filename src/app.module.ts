@@ -1,8 +1,11 @@
-import { Module } from '@nestjs/common';
+import { Module, OnApplicationBootstrap } from '@nestjs/common';
 import { TelecomModule } from './telecom/telecom.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Connection } from 'typeorm';
 import { AbonentEntity, EngineerEntity } from './telecom/models';
 import { config } from './config';
+import path = require('path');
+
 
 @Module({
    imports: [
@@ -15,7 +18,17 @@ import { config } from './config';
          username: config.DB_USER,
          password: config.DB_PASS,
          entities: [AbonentEntity, EngineerEntity],
+         migrations: [path.join(__dirname, 'migrations', '*')],
       }),
    ],
 })
-export class AppModule {}
+export class AppModule implements OnApplicationBootstrap {
+   constructor(
+      private readonly conn: Connection,
+   ) {}
+
+   public async onApplicationBootstrap(): Promise<void> {
+      const migs = await this.conn.runMigrations();
+      console.info(`Successully completed ${migs.length} migrations`);
+   }
+}
