@@ -10,7 +10,7 @@ export class EngineerEntity {
    public id!: number;
 
    @Column({type: 'varchar', length: 16, unique: true, nullable: false})
-   public name!: string;
+   public login!: string;
 
    @Column({type: 'char', length: 11, unique: true, nullable: false})
    public phone!: string;

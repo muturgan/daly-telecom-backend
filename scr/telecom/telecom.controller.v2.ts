@@ -1,8 +1,9 @@
-import { Body, Controller, Get, Post, Put, Delete, Param, HttpCode, HttpStatus, NotFoundException, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, Post, Put, Delete, Param, HttpCode, HttpStatus, NotFoundException, UsePipes, ValidationPipe, UseGuards } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeepPartial, Repository } from 'typeorm';
-import { AbonentBodyDto, Success, CreatedAbonentID, AbonentList, AbonentEntity } from './models';
-import { ApiOperation, ApiTags, ApiOkResponse, ApiParam } from '@nestjs/swagger';
+import { AbonentBodyDto, Success, CreatedAbonentID, AbonentList, AbonentEntity, LoginBodyDto } from './models';
+import { ApiOperation, ApiTags, ApiOkResponse, ApiParam, ApiBasicAuth } from '@nestjs/swagger';
+import { BasicAuthGuard } from './basic_auth.guard';
 
 
 @UsePipes(new ValidationPipe({whitelist: true, forbidNonWhitelisted: true, forbidUnknownValues: true}))
@@ -13,10 +14,23 @@ export class TelecomControllerV2
    constructor(
       @InjectRepository(AbonentEntity)
       private readonly _abonentRepository: Repository<AbonentEntity>,
+      private readonly _authService: BasicAuthGuard,
    ) {}
+
+   @Post('login')
+   @HttpCode(HttpStatus.OK)
+   @ApiOperation({summary: 'Авторизация инженера компании'})
+   @ApiOkResponse({type: Success})
+   public async login(@Body() body: LoginBodyDto): Promise<Success>
+   {
+      const success = await this._authService.checkEngineerAuthorization(body.login, body.password);
+      return {success};
+   }
 
 
    @Get('abonents')
+   @UseGuards(BasicAuthGuard)
+   @ApiBasicAuth()
    @ApiOperation({summary: 'Получение списка абонентов'})
    @ApiOkResponse({type: AbonentList})
    public async getAbonentsList(): Promise<AbonentList>
@@ -26,6 +40,8 @@ export class TelecomControllerV2
    }
 
    @Get('abonents/:abonentId')
+   @UseGuards(BasicAuthGuard)
+   @ApiBasicAuth()
    @ApiParam({name: 'abonentId', type: 'integer'})
    @ApiOperation({summary: 'Получение данных абонента по идентификатору'})
    @ApiOkResponse({type: AbonentEntity})
@@ -46,6 +62,8 @@ export class TelecomControllerV2
 
    @Post('abonents')
    @HttpCode(HttpStatus.OK)
+   @UseGuards(BasicAuthGuard)
+   @ApiBasicAuth()
    @ApiOperation({summary: 'Создание нового абонента'})
    @ApiOkResponse({type: CreatedAbonentID})
    public async addNewAbonent(@Body() body: AbonentBodyDto): Promise<CreatedAbonentID>
@@ -56,6 +74,8 @@ export class TelecomControllerV2
    }
 
    @Put('abonents/:abonentId')
+   @UseGuards(BasicAuthGuard)
+   @ApiBasicAuth()
    @ApiParam({name: 'abonentId', type: 'integer'})
    @ApiOperation({summary: 'Обновление данных абонента'})
    @ApiOkResponse({type: Success})
@@ -82,6 +102,8 @@ export class TelecomControllerV2
    }
 
    @Delete('abonents/:abonentId')
+   @UseGuards(BasicAuthGuard)
+   @ApiBasicAuth()
    @ApiParam({name: 'abonentId', type: 'integer'})
    @ApiOperation({summary: 'Удаление абонента'})
    @ApiOkResponse({type: Success})
