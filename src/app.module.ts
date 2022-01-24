@@ -29,6 +29,6 @@ export class AppModule implements OnApplicationBootstrap {
 
    public async onApplicationBootstrap(): Promise<void> {
       const migs = await this.conn.runMigrations();
-      console.info(`Successully completed ${migs.length} migrations`);
+      console.info(`Successfully completed ${migs.length} migrations`);
    }
 }
