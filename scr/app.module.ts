@@ -15,7 +15,6 @@ import { config } from './config';
          username: config.DB_USER,
          password: config.DB_PASS,
          entities: [AbonentEntity, EngineerEntity],
-         synchronize: true,
       }),
    ],
 })
