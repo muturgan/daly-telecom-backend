@@ -1,4 +1,5 @@
 export * from './abonent.entity';
+export * from './engineer.entity';
 export * from './success.response';
 export * from './abonent_body.dto';
 export * from './abonent_id.response';
