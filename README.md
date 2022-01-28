@@ -1,12 +1,2 @@
 # daly-telecom-backend
-### Шаги для локального запуска:
-- создайте в корне проекта файл **.env** и заполните его по образцу **env.example**
-- поднимите контейнер с базой данной командой **docker-compose up -d** (при первом запуске возможно понадобится **sudo**)
-- установите зависимости командой **npm ci**
-- запустите приложение командой **npm run dev**
-
-По окончании работы не забудте остановить контейнер с базой данных командой **docker-compose down**
-
-### Миграции
-Для создания миграции выполните команду **npm run create -- *< migratoin class name >***  
-Миграции будут автоматически выполняться при старте приложения.
+## deprecated in favor of [DalyTelecom/daly-telecom-backend](https://github.com/DalyTelecom/daly-telecom-backend)
